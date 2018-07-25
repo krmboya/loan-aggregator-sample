@@ -58,7 +58,7 @@ Run the following command in the project root:
 
 - All dates are in a uniform format
 - The msisdn column is not required in the aggregated output
-- The format <month>-<year> is sufficient to uniquely identify a month
+- The format `<month>-<year>` is sufficient to uniquely identify a month
 - The output amount is standardized to two decimal places
 
 This task is implemented in Python, as it's a high-level dynamic language with
@@ -79,12 +79,12 @@ data, the total possible combinations of network by product by month
 is retained in the ordered dictionary
 
 The Ordered dictionary is used in case it is desirable to preserve the
-order in which each (network, product, month) tuple is encounted in the
+order in which each (network, product, month) tuple is encountered in the
 input file.
 
 Automated tests have been included to test the correctness of the functionality.
-Code is autoformatted using [black](https://github.com/ambv/black)
+Code is auto-formatted using [black](https://github.com/ambv/black)
 
 In case it is not desirable to run this directly as a commandline application,
-the class `CommandLineAggregator` is provided which only requires input and
-output file handles that can be provided in some other way.
+the class `CommandLineAggregator` is provided, which can be imported and only
+requires that the input and output file handles are supplied.
