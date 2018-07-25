@@ -43,7 +43,7 @@ class CommandLineAggregator(object):
         self.aggregator = Aggregator()
         self.reader = csv.DictReader(input_file, quotechar="'")
         self.writer = csv.DictWriter(
-            output_file, ["Network", "Product", "Month", "Amount", "Count"]
+            output_file, fieldnames=["Network", "Product", "Month", "Amount", "Count"]
         )
 
     def execute(self):

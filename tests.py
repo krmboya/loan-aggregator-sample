@@ -71,6 +71,9 @@ class TestCommandLineAggregator(unittest.TestCase):
             self.input_file, self.output_file
         )
         command.execute()
+        output = self.output_file.getvalue()
+
+        self.assertIn("Network 2,Loan Product 1,Mar-2016,2244.0,2", output)
 
 
 if __name__ == "__main__":
