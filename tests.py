@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import unittest
 import io
+import decimal
 
 import loan_aggregator
 
@@ -23,7 +24,7 @@ class TestAggregator(unittest.TestCase):
             network="Network 1",
             month="June-2015",
             product="Loan Product 1",
-            amount=100.0,
+            amount=decimal.Decimal('100.0'),
         )
 
         aggregator = loan_aggregator.Aggregator()
@@ -39,14 +40,14 @@ class TestAggregator(unittest.TestCase):
             network="Network 1",
             month="June-2015",
             product="Loan Product 1",
-            amount=100.0,
+            amount=decimal.Decimal('100.0'),
         )
 
         aggregator = loan_aggregator.Aggregator()
         aggregator.update_aggregate(data)
 
         # change data and update
-        data["amount"] = 200.0
+        data["amount"] = decimal.Decimal('200.0')
         aggregator.update_aggregate(data)
 
         # amount and count should have been updated
@@ -73,7 +74,7 @@ class TestCommandLineAggregator(unittest.TestCase):
         command.execute()
         output = self.output_file.getvalue()
 
-        self.assertIn("Network 2,Loan Product 1,Mar-2016,2244.0,2", output)
+        self.assertIn("Network 2,Loan Product 1,Mar-2016,2244.00,2", output)
 
 
 if __name__ == "__main__":

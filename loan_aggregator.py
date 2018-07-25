@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import argparse
 import csv
+import decimal
 import sys
 from collections import OrderedDict
 
@@ -22,7 +23,7 @@ class Aggregator(object):
 
         running_total = self.aggregates.setdefault(
             (data["network"], data["product"], data["month"]),
-            {"amount": 0.0, "count": 0},
+            {"amount": decimal.Decimal('0.00'), "count": 0},
         )
 
         running_total["amount"] += data["amount"]
@@ -59,7 +60,7 @@ class CommandLineAggregator(object):
                 "network": row["Network"],
                 "product": row["Product"],
                 "month": extracted_month(row["Date"]),
-                "amount": float(row["Amount"]),
+                "amount": decimal.Decimal(row["Amount"]),
             }
 
             self.aggregator.update_aggregate(data)
@@ -69,8 +70,16 @@ class CommandLineAggregator(object):
 
         for row in self.aggregator.output_rows():
             output_row = {}
+
+            # title case the column names for the output file
             for key, value in row.items():
                 output_row[key.title()] = value
+
+            output_row['Amount'] = output_row['Amount'].quantize(
+                decimal.Decimal('.01'),
+                decimal.ROUND_HALF_UP
+            )
+
             self.writer.writerow(output_row)
 
 
