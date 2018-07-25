@@ -24,7 +24,7 @@ class TestAggregator(unittest.TestCase):
             network="Network 1",
             month="June-2015",
             product="Loan Product 1",
-            amount=decimal.Decimal('100.0'),
+            amount=decimal.Decimal("100.0"),
         )
 
         aggregator = loan_aggregator.Aggregator()
@@ -40,14 +40,14 @@ class TestAggregator(unittest.TestCase):
             network="Network 1",
             month="June-2015",
             product="Loan Product 1",
-            amount=decimal.Decimal('100.0'),
+            amount=decimal.Decimal("100.0"),
         )
 
         aggregator = loan_aggregator.Aggregator()
         aggregator.update_aggregate(data)
 
         # change data and update
-        data["amount"] = decimal.Decimal('200.0')
+        data["amount"] = decimal.Decimal("200.0")
         aggregator.update_aggregate(data)
 
         # amount and count should have been updated

@@ -23,7 +23,7 @@ class Aggregator(object):
 
         running_total = self.aggregates.setdefault(
             (data["network"], data["product"], data["month"]),
-            {"amount": decimal.Decimal('0.00'), "count": 0},
+            {"amount": decimal.Decimal("0.00"), "count": 0},
         )
 
         running_total["amount"] += data["amount"]
@@ -75,9 +75,8 @@ class CommandLineAggregator(object):
             for key, value in row.items():
                 output_row[key.title()] = value
 
-            output_row['Amount'] = output_row['Amount'].quantize(
-                decimal.Decimal('.01'),
-                decimal.ROUND_HALF_UP
+            output_row["Amount"] = output_row["Amount"].quantize(
+                decimal.Decimal(".01"), decimal.ROUND_HALF_UP
             )
 
             self.writer.writerow(output_row)
@@ -99,9 +98,7 @@ if __name__ == "__main__":
             args.output_file, "w", newline=""
         ) as output_file:
 
-            aggregator = CommandLineAggregator(
-                input_file, output_file
-            )
+            aggregator = CommandLineAggregator(input_file, output_file)
             aggregator.execute()
 
     except IOError as e:
