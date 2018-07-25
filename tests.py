@@ -58,16 +58,19 @@ class TestAggregator(unittest.TestCase):
 
 class TestCommandLineAggregator(unittest.TestCase):
     def setUp(self):
-        self.input_file = io.StringIO()
+        self.input_file = io.StringIO(
+            "MSISDN,Network,Date,Product,Amount\n"
+            "27722342551,'Network 2','16-Mar-2016','Loan Product 1',1122\n"
+            "27725544272,'Network 3','17-Mar-2016','Loan Product 2',2084\n"
+            "27722342551,'Network 2','16-Mar-2016','Loan Product 1',1122\n"
+        )
         self.output_file = io.StringIO()
-    
+
     def test_basic_flow(self):
         command = loan_aggregator.CommandLineAggregator(
-            self.input_file,
-            self.output_file
+            self.input_file, self.output_file
         )
         command.execute()
-        
 
 
 if __name__ == "__main__":
