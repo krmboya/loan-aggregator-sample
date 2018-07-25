@@ -4,7 +4,7 @@ A script that aggregates loans by network, product and month
 
 ## Usage:
 
-`python3 loan_aggregator.py -i </path/to/input/file> -o </path/to/outputfile>`
+`python3 loan_aggregator.py </path/to/input/file> </path/to/outputfile>`
 
 ## Testing:
 

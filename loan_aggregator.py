@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
-from collections import OrderedDict
+import argparse
 import csv
+import sys
+from collections import OrderedDict
 
 
 def extracted_month(date_str):
@@ -70,3 +72,29 @@ class CommandLineAggregator(object):
             for key, value in row.items():
                 output_row[key.title()] = value
             self.writer.writerow(output_row)
+
+
+if __name__ == "__main__":
+
+    parser = argparse.ArgumentParser(
+        description="A script that aggregates loans by network, product and month",
+        add_help=True,
+    )
+
+    parser.add_argument("input_file", help="Path to input file")
+    parser.add_argument("output_file", help="Path to output file")
+    args = parser.parse_args()
+
+    try:
+        with open(args.input_file, newline="") as input_file, open(
+            args.output_file, "w", newline=""
+        ) as output_file:
+
+            aggregator = CommandLineAggregator(
+                input_file, output_file
+            )
+            aggregator.execute()
+
+    except IOError as e:
+        sys.stderr.write("An IO error was encountered: {}\n".format(e))
+        sys.exit(1)

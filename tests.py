@@ -5,8 +5,8 @@ import io
 import loan_aggregator
 
 
-class TestCleaning(unittest.TestCase):
-    def test_clean_month(self):
+class TestUtils(unittest.TestCase):
+    def test_extracting_month_from_input_date(self):
         input_dates = ["15-Apr-2016", "01-June-2015", "01-Apr-2016"]
         expected_output = ["Apr-2016", "June-2015", "Apr-2016"]
         actual_output = [loan_aggregator.extracted_month(d) for d in input_dates]
