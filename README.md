@@ -54,10 +54,36 @@ Run the following command in the project root:
 `python3 tests.py`
 
 
-## Assumptions
+## Some assumptions made
 
-- All dates are in a standard format
+- All dates are in a uniform format
+- The msisdn column is not required in the aggregated output
+- The format <month>-<year> is sufficient to uniquely identify a month
+- The output amount is standardized to two decimal places
 
-## TODO
+This task is implemented in Python, as it's a high-level dynamic language with
+a large standard library that enables rapid prototyping and development.
+No third party packages are required to execute this script.
 
-- Decimal in the place of float
+At the core is an ordered dictionary (hashtable) that is used to aggregate
+values. 
+
+A hashtable is suitable because the required tuple of network, product and
+month can be used as a unique key over with the input data rows are aggregated,
+and access to each key in the dictionary is O(1)
+
+Performance by time will therefore grow by O(n) with `n` being the number of rows
+in the input file. Memory requirements will grow according the to pattern of
+data, the total possible combinations of network by product by month
+(Frequency of validation is two months) as only this amount of state
+is retained in the ordered dictionary
+
+Automated tests have been included to test the correctness of the functionality.
+
+In case it is not desirable to run this directly as a commandline application,
+the class `CommandLineAggregator` is provided which only requires input and
+output file handles that can be provided in some other way.
+
+The Ordered dictionary is used in case it is desirable to preserve the
+order in which each (network, product, month) tuple is encounted in the
+input file.
