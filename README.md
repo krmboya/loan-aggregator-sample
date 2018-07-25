@@ -78,12 +78,13 @@ data, the total possible combinations of network by product by month
 (Frequency of validation is two months) as only this amount of state
 is retained in the ordered dictionary
 
+The Ordered dictionary is used in case it is desirable to preserve the
+order in which each (network, product, month) tuple is encounted in the
+input file.
+
 Automated tests have been included to test the correctness of the functionality.
+Code is autoformatted using [black](https://github.com/ambv/black)
 
 In case it is not desirable to run this directly as a commandline application,
 the class `CommandLineAggregator` is provided which only requires input and
 output file handles that can be provided in some other way.
-
-The Ordered dictionary is used in case it is desirable to preserve the
-order in which each (network, product, month) tuple is encounted in the
-input file.
