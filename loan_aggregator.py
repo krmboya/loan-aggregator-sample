@@ -1,4 +1,9 @@
 #!/usr/bin/env python3
+"""
+A command that aggregates loans by network, product and month
+
+usage: python3 loan_aggregator.py </path/to/input/file> </path/to/outputfile>
+"""
 import argparse
 import csv
 import decimal
