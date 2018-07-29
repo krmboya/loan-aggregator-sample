@@ -11,7 +11,7 @@ To test, run the following in the project root:
 
 `python3 loan_aggregator.py Loans.csv Output.csv`
 
-An file named `Output.csv` will be created with the aggregated results.
+A file named `Output.csv` will be created with the aggregated results.
 
 Sample input:
 
